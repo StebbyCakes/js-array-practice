@@ -5,18 +5,30 @@
 
 // Put your answer below -------------------------
 
-var str = "word"
-arr = [];
+// var str = "word"
+// arr = [];
+//
+// function repeat(str, i) {
+//   for (let j = i; j > 0; j--){
+//     arr.push(str);
+//   }
+// }
+// repeat(str, 8)
+// console.log(arr);
+// //
+// function myFunction(str, i){
+//   for let(j = 0; j < i; j++){
+//     result.push(str);
+//   }
+//   return result;
+// }
 
-function repeat(str, i) {
-  for (let j = i; j > 0; j--){
-    arr.push(str);
-  }
+
+ const myFunction = function(str, i){
+  return Array.from({length: i}, function(){
+    return str;
+  });
 }
-repeat(str, 8)
-console.log(arr);
-
-
 
 
 
@@ -29,14 +41,23 @@ console.log(arr);
 
 // Put your answer below -------------------------
 
-arr =['dog', 'cat', 'bird', 'rock'];
-function reverseArray(arr) {
+// arr =['dog', 'cat', 'bird', 'rock'];
+// function reverseArray(arr) {
+//   const result = [];
+//   for (let i = arr.length - 1; i > -1; i--){ // -1 starts off at the last index of the array
+//     result.push(arr[i]);
+//   } console.log(result)
+// }
+// reverseArray(arr)
+
+function reverseArray(arr){
   const result = [];
-  for (let i = arr.length - 1; i > -1; i--){ // -1 starts off at the last index of the array
-    result.push(arr[i]);
-  } console.log(result)
+
+  for(let i = 0; i < arr.length; i++){
+    result.unshift(arr[i]);
+  }
+  return result;
 }
-reverseArray(arr)
 
 
 // // -----------------------------------------------
@@ -59,6 +80,15 @@ function trueArr(arr) {
 }
 trueArr(arr)
 
+const removeFalsyValues(arr){
+  const result = [];
+  for (let i = 0; i < arr.length; i++){
+    if(arr[i]){ // (!!arr[i] === true)
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
 
 
 // // -----------------------------------------------
@@ -71,15 +101,32 @@ trueArr(arr)
 //
 // // Put your answer below -------------------------
 
-const myArray = [['name', 'Charlie'], ['color', 'brown'], ['age', 10]];
-let newArray =[];
-function nestedArray(myArray) {
-newArray [myArray[0][0]] = `${myArray[0][1]}`,
-newArray [myArray[1][0]] = `${myArray[1][1]}`,
-newArray [myArray[2][0]] = `${myArray[2][1]}`,
-console.log(newArray);
+// const myArray = [['name', 'Charlie'], ['color', 'brown'], ['age', 10]];
+// let newArray =[];
+// function nestedArray(myArray) {
+// newArray [myArray[0][0]] = `${myArray[0][1]}`,
+// newArray [myArray[1][0]] = `${myArray[1][1]}`,
+// newArray [myArray[2][0]] = `${myArray[2][1]}`,
+// console.log(newArray);
+// }
+// nestedArray(myArray);
+
+
+
+function createObj1(arr) {
+  const result = {};
+
+  for (let i = 0; i < arr.length; i++){
+    // result[arr[i][0]] = [arr[i][1]]; // most simple answer
+    let nestedArray = arr[i];
+    let key = nestedArray[0];
+    let value = nestedArray[1];
+    result[key] = value;
+  // result.student
+  // result['student'] // both of these do the same thing
+  }
+  return result;
 }
-nestedArray(myArray);
 
 
 
@@ -95,26 +142,39 @@ nestedArray(myArray);
 //
 // // Put your answer below -------------------------
 
-arr = [1, 2, 2, 3, 3, 4, 5, 5, 6, 4, 8, 3, 2, 4]
+// arr = [1, 2, 2, 3, 3, 4, 5, 5, 6, 4, 8, 3, 2, 4]
+//
+// function noDupe(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     var posi = arr[i];
+//     var count = 0;
+//     for (let j = 0; j < arr.length; j++) {
+//       if (posi === arr[j]) {
+//         count++
+//         if (count > 1) {
+//           arr.splice(j, 1);
+//           j--
+//         }
+//       }
+//     }
+//   }
+// }
+// noDupe(arr)
+// console.log(arr)
 
-function noDupe(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    var posi = arr[i];
-    var count = 0;
-    for (let j = 0; j < arr.length; j++) {
-      if (posi === arr[j]) {
-        count++
-        if (count > 1) {
-          arr.splice(j, 1);
-          j--
-        }
-      }
-    }
+
+// Teach's solutions
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+} // best solution
+
+function removeDuplicates(arr) {
+  const obj  = {};
+  for(let i = 0; i < arr.length; i++) {
+    obj[arr[i]] = arr[i];
   }
-}
-noDupe(arr)
-console.log(arr)
-
+  return Array.from(Object.values(obj));
+} // another solution
 
 
 
@@ -130,34 +190,58 @@ console.log(arr)
 //
 // // Put your answer below -------------------------
 //
-function identical(arr1, arr2) {
-  if (arr1.length != arr2.length) {
+// function identical(arr1, arr2) {
+//   if (arr1.length != arr2.length) {
+//     return false;
+//   } else {
+//     var newArray = [];
+//     for (i = 0; i < arr1.length; i++) {
+//       var search = false;
+//       for (j = 0; j < arr2.length; j++) {
+//         console.log(arr1[i], arr2[j]);
+//         if (arr1[i] === arr2[j]) {
+//           search = true;
+//           newArray.push(true);
+//           break;
+//         }
+//       } console.log(search);
+//       if (search === false) {
+//         newArray.push(false);
+//       }
+//     }
+//     console.log(newArray);
+//     if (newArray.includes(false)) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   }
+// }
+// console.log(identical([1, 2, 3, 5, 4], [1, 2, 3, 4, 6]));
+
+
+
+
+
+
+function compareArrays(arr1, arr2){
+  if(arr1.length !== arr2.length){
     return false;
-  } else {
-    var newArray = [];
-    for (i = 0; i < arr1.length; i++) {
-      var search = false;
-      for (j = 0; j < arr2.length; j++) {
-        console.log(arr1[i], arr2[j]);
-        if (arr1[i] === arr2[j]) {
-          search = true;
-          newArray.push(true);
-          break;
-        }
-      } console.log(search);
-      if (search === false) {
-        newArray.push(false);
-      }
-    }
-    console.log(newArray);
-    if (newArray.includes(false)) {
+  }
+  arr1.sort(function(a, b) {
+    return a - b
+  });
+
+  arr2.sort(function(a, b){
+    return a - b;
+  });
+  for (let i = 0; i < arr1.length; i++) {
+    if(arr1[i] !== arr2[i]){
       return false;
-    } else {
-      return true;
     }
   }
-}
-console.log(identical([1, 2, 3, 5, 4], [1, 2, 3, 4, 6]));
+  return true;
+}  //easiest solution
 
 
 
